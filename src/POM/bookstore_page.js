@@ -1,11 +1,11 @@
 const {expect} = require('@playwright/test');
-
-exports.BookStorePage = class BookStorePage{
+const {lowerCaseText, lowerCaseMultipleText} = require('../utils/stringUtils')
+export class BookStorePage{
     constructor(page){
         this.page = page;
         this.getLoginButton = page.getByRole('button', { name: 'Login' });
-        this.getSearchField = page.getByLocator('id=searchBox');
-        this.getSearchResultInTable = page.getByLocator('//span[contains(@id,"see-book")');
+        this.getSearchField = page.getByPlaceholder('Type to search');
+        this.getSearchResultInTable = page.locator('//span[contains(@id,"see-book")]/a');
     }
 
     async clickLoginButtonInBookStore(){
@@ -17,11 +17,11 @@ exports.BookStorePage = class BookStorePage{
     }
 
     async getResultFromSearchResult(){
-        await this.getSearchResultInTable.innerText();
+      return await this.getSearchResultInTable.allInnerTexts();}
+
+    async clearSearchField(){
+        await this.getSearchField.clear();
     }
 
-    async verifiedSearchResult(searchResult, searchText){
-        searchResult = searchResult.ToLowerCase();
-        await expect(searchResult.toHaveText(searchText));
-    }
+
 }
