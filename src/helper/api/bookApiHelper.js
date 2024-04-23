@@ -20,7 +20,7 @@ export class bookApiHelper {
                 "password": password
             }
         });
-        //console.log(await responseToken.json());
+        console.log(await responseToken.json());
         const responseBody = await responseToken.json();
         return responseBody.token;
     }

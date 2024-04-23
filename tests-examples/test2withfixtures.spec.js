@@ -1,4 +1,4 @@
-const { test , expect} = require("../src/fixtures/pageFixtures");
+const { test , expect} = require("../src/fixtures/page-fixtures");
 
 
 const bookName = ['Design','design'];

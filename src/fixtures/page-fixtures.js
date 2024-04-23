@@ -1,26 +1,24 @@
+const base = require('@playwright/test');
+const { Homepage } = require('../POM/homepage');
+const { BookStorePage } = require('../POM/bookstore_page');
+const { LoginPage } = require('../POM/loginpage');
+const { ProfilePage } = require('../POM/profilepage');
 
-const { Homepage } = require("../src/POM/homepage");
-const { BookStorePage } = require("../src/POM/bookstore_page");
-const { LoginPage } = require("../src/POM/loginpage");
-const { ProfilePage } = require("../src/POM/profilepage");
-
-
-export const test = baseTest.extend({
-    homepage: async ({}, use) => {
-        await use(new Homepage());
+exports.test = base.test.extend({
+    homepage: async ({page} , use)=>{
+        await use(new Homepage(page));
     },
 
-    bookstorePage: async ({}, use) => {
-        await use(new BookStorePage());
+    bookstorePage: async ({page} , use)=>{
+        await use(new BookStorePage(page));
     },
 
-    loginPage: async ({}, use) => {
-        await use(new LoginPage());
+    loginPage: async ({page} , use)=>{
+        await use(new LoginPage(page));
     },
 
-    profilePage: async({}, use)=>{
-        await use(new ProfilePage());
-    }
+    profilePage: async ({page} , use)=>{
+        await use(new ProfilePage(page));
+    },
 })
-
-export const expect = baseExpect;
+exports.expect = base.expect;

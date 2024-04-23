@@ -1,38 +1,36 @@
-const { test, expect } = require("@playwright/test");
-const { Homepage } = require("../src/POM/homepage");
-const { BookStorePage } = require("../src/POM/bookstore_page");
+const { test, expect } = require("../src/fixtures/page-fixtures");
 const { BasePage } = require("../src/POM/basepage");
-const { LoginPage } = require("../src/POM/loginpage");
-const { ProfilePage } = require("../src/POM/profilepage");
 const { handleAlert } = require("../src/utils/handlerAlertUtils");
 const { bookApiHelper } = require("../src/helper/api/bookApiHelper");
+const { Users } = require('../src/data-object/account-object');
+const { Books } = require('../src/data-object/book-object');
+const { readFromJSONFile } = require('../src/utils/fileUtils');
+const playerJSONData = readFromJSONFile(process.env.PLAYER_FILEPATH);
+const bookJSONData = readFromJSONFile(process.env.BOOK_FILEPATH);
 
-const username = "anhlet7";
-const password = "Te5t1ng!";
-const userID = "8c6c736d-fce6-4673-b1a4-187a569c6f74";
-const isbn = "9781449331818";
-const bookName = "Learning JavaScript Design Patterns";
+let user = new Users(playerJSONData.username,playerJSONData.password,playerJSONData.userID);
+user = Object.assign(Users.prototype, user);
 
-//isbn: 9781449331818
-//Book name: Learning JavaScript Design Patterns
-//UUID: 10c99905-2298-4eef-bf8a-1937ac4146e1
+let book = new Books(bookJSONData.bookName, bookJSONData.bookISBN);
+book = Object.assign(Books.prototype, book);
+
+const username = user.getUsername();
+const password = user.getPassword();
+const userID = user.getUserID();
+const bookName = book.getBookName();
 test.beforeEach("Add book before delete", async ({ request }) => {
-    bookApiHelper.addBookForUser(request, username, password, userID, isbn);
+  bookApiHelper.addBookForUser(request, username, password, userID, book.getBookISBN());
 });
 
 test.describe("Delete book", () => {
-    test("Delete book test", async ({ page }) => {
-        const homepage = new Homepage(page);
+    test("Delete book test", async ({ homepage, loginPage, bookstorePage, profilePage }) => {
         await homepage.goToHomePage();
         await homepage.goToBookStorePage();
-        const bookStorePage = new BookStorePage(page);
-        const loginPage = new LoginPage(page);
         const basepage = new BasePage(page);
-        const profilePage = new ProfilePage(page);
-        await bookStorePage.clickLoginButtonInBookStore();
+        await bookstorePage.clickLoginButtonInBookStore();
         await loginPage.loginWithValidAccount(username, password);
         //await bookStorePage.waitForLogoutAppear();
-        await expect(bookStorePage.getUserNameValue).toHaveText(username);
+        await expect(bookstorePage.getUserNameValue).toHaveText(username);
         await basepage.clickIntoChildrenBookStoreDropDownList("Profile");
         await profilePage.removeBook(bookName, page);
         await profilePage.clickOKInPopup();
