@@ -5,7 +5,7 @@ export class Homepage{
     }
 
     async goToHomePage(){
-        await this.page.goto('https://demoqa.com/');
+        await this.page.goto(process.env.BASE_URL);
     }
 
     async goToBookStorePage(){
