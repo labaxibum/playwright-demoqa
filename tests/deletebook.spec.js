@@ -5,21 +5,23 @@ const { bookApiHelper } = require("../src/helper/api/bookApiHelper");
 const { Users } = require('../src/data-object/account-object');
 const { Books } = require('../src/data-object/book-object');
 const { readFromJSONFile } = require('../src/utils/fileUtils');
-const playerJSONData = readFromJSONFile(process.env.PLAYER_FILEPATH);
 const bookJSONData = readFromJSONFile(process.env.BOOK_FILEPATH);
 
-let user = new Users(playerJSONData.username,playerJSONData.password,playerJSONData.userID);
-user = Object.assign(Users.prototype, user);
+let user = "";
+//user = Object.assign(Users.prototype, user); object [promise]
 
 let book = new Books(bookJSONData.bookName, bookJSONData.bookISBN);
 book = Object.assign(Books.prototype, book);
 
-const username = user.getUsername();
-const password = user.getPassword();
-const userID = user.getUserID();
-const bookName = book.getBookName();
+let username;
+let password;
+let userID;
+let bookName;
 test.beforeEach("Add book before delete", async ({ request }) => {
-  bookApiHelper.addBookForUser(request, username, password, userID, book.getBookISBN());
+    const playerJSONData = await readFromJSONFile(process.env.PLAYER_FILEPATH);
+    user = new Users(playerJSONData.username, playerJSONData.password, playerJSONData.userID);
+    console.log(user);
+    // bookApiHelper.addBookForUser(request, username, password, userID, book.getBookISBN());
 });
 
 test.describe("Delete book", () => {
