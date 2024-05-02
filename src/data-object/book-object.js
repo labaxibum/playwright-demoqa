@@ -3,10 +3,4 @@ export class Books{
         this.bookName = bookName;
         this.bookISBN = bookISBN;
     }
-    getBookName(){
-        return this.bookName;
-    }
-    getBookISBN(){
-        return this.bookISBN;
-    }
 }

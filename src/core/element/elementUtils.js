@@ -6,7 +6,11 @@ export class Element{
     }
 
     static async click(){
-        BrowserManagement.page.locator(this.locator).click();
+        await BrowserManagement.page.locator(this.locator).click();
+    }
+
+    static async inputIntoElement(inputText){
+        await BrowserManagement.page.locator(this.locator).fill(inputText);
     }
     
 }

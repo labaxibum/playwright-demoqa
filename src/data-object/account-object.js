@@ -4,13 +4,4 @@ export class Users {
         this.password = password;
         this.userID = userID;
     }
-    getUsername(){
-        return this.username;
-    }
-    getPassword(){
-        return this.password;
-    }
-    getUserID(){
-        return this.userID;
-    }
 }

@@ -52,7 +52,9 @@ export class bookApiHelper {
                 ]
             }
         });
+        console.log(await responseAddBook.json());
         //expect(responseAddBook.status()).toBe(201);
+        
         //should return status 201
         return responseAddBook.status();
 
