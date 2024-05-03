@@ -1,6 +1,8 @@
-export class ProfilePage{
+import { BasePage } from "./basepage";
+
+export class ProfilePage extends BasePage{
     constructor(page){
-        this.page = page;
+        super(page);
         this.getRemoveButtonOfTheBook = bookName => page.locator(`//a[.='${bookName}']/ancestor::div[@class='rt-tr-group']//span[@id='delete-record-undefined']`);
         this.getBookTitle = bookName => page.locator(`//a[.='${bookName}']`);
         this.getOKButtonInPopup = page.getByRole('button', { name: 'OK' });

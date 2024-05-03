@@ -1,8 +1,9 @@
 const { test, expect } = require('@playwright/test');
 const {Homepage} = require('../src/POM/homepage');
 const {BookStorePage} = require('../src/POM/bookstore_page');
+const {lowerCaseText} = require('../src/utils/stringUtils')
 
-const bookName = ['Design','design'];
+const bookNames = ['Design','design'];
 test.beforeEach(async ({page}) => {
     const homepage = new Homepage(page);
     await homepage.goToHomePage();
@@ -10,19 +11,15 @@ test.beforeEach(async ({page}) => {
 })
 
 test.describe('Search book with multiple results', ()=>{
-    test('Insert into search field and verify book', async ({page}) => {
+for (const bookName of bookNames){
+    test(`Insert [${bookName}] into search field and verify book`, async ({page}) => {
         const bookStorePage  = new BookStorePage(page);
-        let searchResult = [];
-        for (let index = 0; index < bookName.length; index++) {
-            const bookNameInputted = bookName[index];
-            await bookStorePage.inputIntoSearchField(bookNameInputted);
-            searchResult = await bookStorePage.getResultFromSearchResult();
-            for (let index = 0; index < searchResult.length; index++) {
-                const element = searchResult[index];
-                expect(element.toLowerCase()).toContain(bookNameInputted.toLowerCase());
-            }
-            await bookStorePage.clearSearchField();
+        await bookStorePage.inputIntoSearchField(bookName);
+        let searchResult = await bookStorePage.getResultFromSearchResult();
+        for (let index = 0; index < searchResult.length; index++) {
+            const element = searchResult[index];
+            expect(await lowerCaseText(element)).toContain(await lowerCaseText(bookName));
         }
     })
-})
+}})
 

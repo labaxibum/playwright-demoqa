@@ -30,7 +30,7 @@ test.describe("Delete book", () => {
         await homePage.goToHomePage();
         await homePage.goToBookStorePage();
         await bookstorePage.clickLoginButtonInBookStore();
-        await loginPage.loginWithValidAccount(username, password);
+        await loginPage.loginWithAccount(username, password);
         //await bookStorePage.waitForLogoutAppear();
         await expect(bookstorePage.getUserNameValue).toHaveText(username);
         await basePage.clickIntoChildrenBookStoreDropDownList("Profile");

@@ -1,8 +1,8 @@
-const { expect } = require('@playwright/test');
-const { lowerCaseText, lowerCaseMultipleText } = require('../utils/stringUtils')
-export class BookStorePage {
+import { BasePage } from './basepage';
+
+export class BookStorePage extends BasePage {
     constructor(page) {
-        this.page = page;
+        super(page);
         this.getLoginButton = page.getByRole('button', { name: 'Login' });
         this.getSearchField = page.getByPlaceholder('Type to search');
         this.getLogoutButton = page.getByRole('button', { name: 'Log out' });

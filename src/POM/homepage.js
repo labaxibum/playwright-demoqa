@@ -1,6 +1,8 @@
-export class Homepage{
+import { BasePage } from "./basepage";
+
+export class Homepage extends BasePage{
     constructor(page){
-        this.page = page;
+        super(page);
         this.getBookStoreApplicationCard = page.getByRole('heading', { name: 'Book Store Application' });
     }
 

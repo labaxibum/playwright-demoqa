@@ -3,6 +3,7 @@ export class BasePage{
         this.page = page;
         this.getBookStoreApplicationDropDownList = page.locator('span').filter({ hasText: 'Book Store Application'});
         this.getProfilePage =  page.locator('li').filter({ hasText: "Profile" });
+        this.getPage  = pageName => page.locator('li').filter({ hasText: `${pageName}`});;
     }
 
     async clickIntoBookStoreDropDownList(){
