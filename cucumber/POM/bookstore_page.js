@@ -1,6 +1,6 @@
-import { BasePage } from "./basepage";
-const { Element } = require("../core/element/elementUtils");
-export class BookStorePage extends BasePage {
+const { BasePage } =require("./basepage");
+const { Element } = require("../element/elementUtils");
+class BookStorePage extends BasePage {
   constructor(page) {
     super(page);
     this.getLoginButton = page.getByRole("button", { name: "Login" });
@@ -35,4 +35,8 @@ export class BookStorePage extends BasePage {
   async getUsernameValue() {
     return await this.getUserNameValue.innerText();
   }
+}
+
+module.exports = {
+  BookStorePage
 }

@@ -1,28 +1,29 @@
-const {Given, When, Then} = require('@cucumber/cucumber')
-const {BasePage} = require("../../POM/basepage");
+const { Given, When, Then } = require('@cucumber/cucumber')
+const { BasePage } = require("../../POM/basepage");
+const { HomePage } = require("../../POM/homepage");
+const { BookStorePage } = require("../../POM/bookstore_page");
 const { readFromJSONFile } = require("../../utils/fileUtils");
 const { Users } = require('../../data-object/account-object');
 
+let basePage, homePage, bookStorePage, loginPage, profilePage;
+
+
 Given('User navigate to the application', async function () {
-    const playerJSONData = await readFromJSONFile(process.env.PLAYER_FILEPATH);
-    user = new Users(playerJSONData.username, playerJSONData.password, playerJSONData.userID);
-    console.log(user.username);
-    const basePage = new BasePage(page);
-    
-    await page.goto(process.env.BASE_URL);
-    basePage.clickIntoBookStoreDropDownList();
+    basePage = new BasePage(page);
+    homePage = new HomePage(page);
+    bookStorePage = new BookStorePage(page);
+    //const playerJSONData = await readFromJSONFile(process.env.PLAYER_FILEPATH);
+    //const user = new Users(playerJSONData.username, playerJSONData.password, playerJSONData.userID);
+
+    await homePage.goToHomePage();
 });
 
 
 When('User navigate to BookStore page', async function () {
-    let getBookStoreApplicationCard = page.getByRole('heading', { name: 'Book Store Application' });
-    // Write code here that turns the phrase above into concrete actions
-    await getBookStoreApplicationCard.scrollIntoViewIfNeeded();
-    await getBookStoreApplicationCard.click();
+    await homePage.goToBookStorePage();
 });
 
 
 Then('Verify user is in BookStore page', async function () {
-    let loginButton = page.getByRole("button", { name: "Login" });
-    await loginButton.toBeVisible();
+    await bookStorePage.clickLoginButtonInBookStore();
 });

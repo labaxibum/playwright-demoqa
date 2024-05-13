@@ -1,6 +1,6 @@
-import { BasePage } from "./basepage";
+const { BasePage } =require("./basepage");
 
-export class ProfilePage extends BasePage{
+class ProfilePage extends BasePage{
     constructor(page){
         super(page);
         this.getRemoveButtonOfTheBook = bookName => page.locator(`//a[.='${bookName}']/ancestor::div[@class='rt-tr-group']//span[@id='delete-record-undefined']`);
@@ -16,4 +16,8 @@ export class ProfilePage extends BasePage{
     async clickOKInPopup(){
        await this.getOKButtonInPopup.click();
     }
+}
+
+module.exports = {
+    ProfilePage
 }

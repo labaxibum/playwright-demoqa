@@ -1,6 +1,6 @@
-import { BasePage } from "./basepage";
+const { BasePage } =require("./basepage");
 
-export class Homepage extends BasePage{
+class HomePage extends BasePage{
     constructor(page){
         super(page);
         this.getBookStoreApplicationCard = page.getByRole('heading', { name: 'Book Store Application' });
@@ -14,4 +14,7 @@ export class Homepage extends BasePage{
         await this.getBookStoreApplicationCard.scrollIntoViewIfNeeded();
         await this.getBookStoreApplicationCard.click();
     }
+}
+module.exports = {
+    HomePage
 }

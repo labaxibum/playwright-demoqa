@@ -1,6 +1,6 @@
-import { BasePage } from "./basepage";
+const { BasePage } =require("./basepage");
 
-export class LoginPage extends BasePage {
+class LoginPage extends BasePage {
     constructor(page){
         super(page);
         this.getUsernameField = page.getByPlaceholder('UserName');
@@ -13,4 +13,8 @@ export class LoginPage extends BasePage {
        await this.getPasswordField.fill(password);
        await this.getLoginButton.click();
     }
+}
+
+module.exports = {
+    LoginPage
 }
