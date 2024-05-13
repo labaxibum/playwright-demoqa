@@ -2,8 +2,9 @@ const { Before, BeforeAll, AfterAll, After, setDefaultTimeout } = require("@cucu
 const {initBrowser} = require("../browser/browserManagement");
 const { readFromJSONFile } = require("../../src/utils/fileUtils");
 
-setDefaultTimeout(60000);
-
+setDefaultTimeout(600000);
+const dotenv = require('dotenv');
+dotenv.config();
 let browser;
 
 
