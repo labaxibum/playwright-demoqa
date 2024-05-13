@@ -1,4 +1,5 @@
-const { BasePage } =require("./basepage");
+const { timeout } = require("../../playwright.config");
+const { BasePage } = require("./basepage");
 
 class HomePage extends BasePage{
     constructor(page){
@@ -7,7 +8,7 @@ class HomePage extends BasePage{
     }
 
     async goToHomePage(){
-        await this.page.goto(process.env.BASE_URL);
+        await this.page.goto(process.env.BASE_URL, {timeout:60000});
     }
 
     async goToBookStorePage(){

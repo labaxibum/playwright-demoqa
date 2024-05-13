@@ -1,17 +1,13 @@
 const { Before, BeforeAll, AfterAll, After, setDefaultTimeout } = require("@cucumber/cucumber");
 const {initBrowser} = require("../browser/browserManagement");
-const { readFromJSONFile } = require("../../src/utils/fileUtils");
 
-setDefaultTimeout(600000);
+setDefaultTimeout(60*1000);
 const dotenv = require('dotenv');
 dotenv.config();
 let browser;
 
 
 BeforeAll(async function(){
-    let data = readFromJSONFile("../cucumber/environment/test.json");
-    global.baseURL = data.BaseURL;
-    global.browserType = data.browsere;
     browser = await initBrowser();
 });
 

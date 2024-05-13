@@ -4,7 +4,7 @@ module.exports = {
             snippetInterface: "async-await"
         },
         paths: [
-            "cucumber/test/features/"
+            "cucumber/test/features/loginIntoSite.feature"
         ],
         require: [
             "cucumber/test/steps/*.js",

@@ -1,11 +1,10 @@
 const { firefox, chromium, webkit } = require('playwright');
 
  const options = {
-    headless: true
+    headless: !true
  };
 
 exports.initBrowser = () => {
-    console.log(browserType);
     const browserType = process.env.BROWSER || "chrome";
     switch (browserType) {
         case "chrome":
