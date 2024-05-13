@@ -1,8 +1,16 @@
 const {Given, When, Then} = require('@cucumber/cucumber')
+const {BasePage} = require("../../POM/basepage");
+const { readFromJSONFile } = require("../../utils/fileUtils");
+const { Users } = require('../../data-object/account-object');
 
 Given('User navigate to the application', async function () {
-    console.log(process.env.BASE_URL);
-    await page.goto("https://demoqa.com/");
+    const playerJSONData = await readFromJSONFile(process.env.PLAYER_FILEPATH);
+    user = new Users(playerJSONData.username, playerJSONData.password, playerJSONData.userID);
+    console.log(user.username);
+    const basePage = new BasePage(page);
+    
+    await page.goto(process.env.BASE_URL);
+    basePage.clickIntoBookStoreDropDownList();
 });
 
 

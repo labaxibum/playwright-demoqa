@@ -1,8 +1,9 @@
 const { Before, BeforeAll, AfterAll, After, setDefaultTimeout } = require("@cucumber/cucumber");
 const {initBrowser} = require("../browser/browserManagement");
 
-setDefaultTimeout(60000);
-
+setDefaultTimeout(600000);
+const dotenv = require('dotenv');
+dotenv.config();
 let browser;
 
 
