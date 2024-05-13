@@ -1,11 +1,11 @@
- const { firefox, chromium, webkit } = require('playwright');
+const { firefox, chromium, webkit } = require('playwright');
 
  const options = {
     headless: !true
- };
+};
 
- exports.initBrowser = () => {
-    console.log(process.env.BROWSER);
+exports.initBrowser = () => {
+    console.log(browserType);
     const browserType = process.env.BROWSER || "chrome";
     switch (browserType) {
         case "chrome":
@@ -17,4 +17,4 @@
         default:
             throw new Error("Please set the proper browser!");
     }
- };
+};

@@ -1,7 +1,6 @@
 const {Given, When, Then} = require('@cucumber/cucumber')
-
 Given('User navigate to the application', async function () {
-    console.log(process.env.BASE_URL);
+    console.log(baseURL);
     await page.goto("https://demoqa.com/");
 });
 
