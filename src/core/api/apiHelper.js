@@ -1,76 +1,81 @@
 const Ajv = require("ajv");
 let ajv = new Ajv.default({ allErrors: true });;
 var deleteBookSchema = {
-  type: "object",
-  required: ["userId", "isbn", "message"],
-  properties: {
-    userId: {
-      type: "string",
+    type: "object",
+    required: ["userId", "isbn", "message"],
+    properties: {
+        userId: {
+            type: "string",
+        },
+        isbn: {
+            type: "string",
+        },
+        message: {
+            type: "string",
+        },
     },
-    isbn: {
-      type: "string",
-    },
-    message: {
-      type: "string",
-    },
-  },
 };
 
 var userSchema = {
-  type: "object",
-  properties: {
-    token: {
-      type: "string",
+    "type": "object",
+    "properties": {
+        "token": {
+            "type": "string"
+        },
+        "expires": {
+            "type": "string"
+        },
+        "status": {
+            "type": "string"
+        },
+        "result": {
+            "type": "string"
+        }
     },
-    expires: {
-      type: "string",
-    },
-    status: {
-      type: "string",
-    },
-    result: {
-      type: "string",
-    },
-  },
-  required: ["token", "expires", "status", "result"],
+    "required": [
+        "token",
+        "expires",
+        "status",
+        "result"
+    ]
 };
 
 var addBookJsonSchema = {
-  type: "object",
-  properties: {
-    books: {
-      type: "array",
-      items: [
-        {
-          type: "object",
-          properties: {
-            isbn: {
-              type: "string",
-            },
-          },
-          required: ["isbn"],
+    type: "object",
+    properties: {
+        books: {
+            type: "array",
+            items: [
+                {
+                    type: "object",
+                    properties: {
+                        isbn: {
+                            type: "string",
+                        },
+                    },
+                    required: ["isbn"],
+                },
+            ],
+            minItems: 1,
+            additionalItems: false
         },
-      ],
-      minItems: 1,
-      additionalItems: false
     },
-  },
-  required: ["books"],
+    required: ["books"],
 };
 export class apiHelper {
-  static async validationFunction(schemaStructure, responseMessage) {
-    const validate = ajv.compile(schemaStructure);
-    const valid = validate(responseMessage);
-    if (!valid) console.log(validate.errors);
-  }
-  static validateTheAddBookSchema(responseMessage) {
-    this.validationFunction(addBookJsonSchema, responseMessage);
-  }
-  static validateTheDeleteBookSchema(responseMessage) {
-    this.validationFunction(deleteBookSchema, responseMessage);
-  }
+    static async validationFunction(schemaStructure, responseMessage) {
+        const validate = ajv.compile(schemaStructure);
+        const valid = validate(responseMessage);
+        if (!valid) console.log(validate.errors);
+    }
+    static validateTheAddBookSchema(responseMessage) {
+        this.validationFunction(addBookJsonSchema, responseMessage);
+    }
+    static validateTheDeleteBookSchema(responseMessage) {
+        this.validationFunction(deleteBookSchema, responseMessage);
+    }
 
-  static validateTheUserSchema(responseMessage) {
-    this.validationFunction(userSchema, responseMessage);
-  }
+    static validateTheUserSchema(responseMessage) {
+        this.validationFunction(userSchema, responseMessage);
+    }
 }
