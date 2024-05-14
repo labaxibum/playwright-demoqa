@@ -4,7 +4,7 @@ module.exports = {
             snippetInterface: "async-await"
         },
         paths: [
-            "cucumber/test/features/loginIntoSite.feature"
+            "cucumber/test/features/"
         ],
         require: [
             "cucumber/test/steps/*.js",
@@ -16,6 +16,6 @@ module.exports = {
             "json:test-results/cucumber-report.json",
             "rerun:@rerun.txt"
         ],
-        parallel: 1
+        parallel: 2
     }
 }
