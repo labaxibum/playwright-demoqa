@@ -2,7 +2,7 @@ const { Given, When, Then } = require('@cucumber/cucumber');
 const { HomePage } = require("../../POM/homepage");
 const { BookStorePage } = require("../../POM/bookstore_page");
 const { LoginPage } = require("../../POM/loginpage");
-
+const { expect } = require("@playwright/test");
 let homePage, bookStorePage, loginPage;
 
 Given('I visit login page', async function () {

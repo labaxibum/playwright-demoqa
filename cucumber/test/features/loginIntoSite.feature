@@ -8,3 +8,4 @@ Feature: Login into BookStore Page test
     Examples: 
         |username|password|
         |anhlet7|Te5t1ng!|
+        |anhlet6|Te5t1ng!|
