@@ -12,6 +12,7 @@ class LoginPage extends BasePage {
        await this.getUsernameField.fill(username);
        await this.getPasswordField.fill(password);
        await this.getLoginButton.click();
+       console.log("Login with account: username " + username + " password" + password )
     }
 }
 
