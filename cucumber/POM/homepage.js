@@ -1,4 +1,3 @@
-const { timeout } = require("../../playwright.config");
 const { BasePage } = require("./basepage");
 
 class HomePage extends BasePage{
