@@ -1,7 +1,7 @@
 const { firefox, chromium, webkit } = require('playwright');
 
  const options = {
-    headless: !true
+    headless: true
  };
 
 exports.initBrowser = () => {
