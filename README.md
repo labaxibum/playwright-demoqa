@@ -16,7 +16,7 @@
 + Run test using 'npm test' in the CMD
 
 #Need to improve:
-- [] Add screenshot for failed test
-- [] Improve reports
-- [] Add logs for steps
-- [] Improve element actions 
+- [ ] Add screenshot for failed test
+- [ ] Improve reports
+- [ ] Add logs for steps
+- [ ] Improve element actions 
