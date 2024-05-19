@@ -14,3 +14,9 @@
 ** Run a specific test **
 + Add tests file path in to paths: [ "cucumber/test/features/" ] in cucumber.js
 + Run test using 'npm test' in the CMD
+
+#Need to improve:
+[] Add screenshot for failed test
+[] Improve reports
+[] Add logs for steps
+[] Improve element actions 
