@@ -6,8 +6,10 @@
 
 # For cucumber test: 
 ** Run all tests in the feature file ** 
-+ Add tests in feature files
-+ Run test using 'npm test' in the CMD
+Step 1: Add tests with detail steps in feature files
+Step 2: Run ```npm test``` in the CMD and wait for cucumber to generate a missing scripts file
+Step 3: Then create a step definition file in steps folder
+Step 4: Rerun ```npm test``` and check for the result
 
 ** Run a specific test **
 + Add tests file path in to paths: [ "cucumber/test/features/" ] in cucumber.js
