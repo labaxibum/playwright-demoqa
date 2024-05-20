@@ -33,6 +33,7 @@ steps:
     testRunTitle: "Playwright Tests"
 
 - task: PublishCucumberReport@1
+  condition: always()
   displayName: 'Publish Cucumber Report'
   inputs:
     jsonDir: '$(System.DefaultWorkingDirectory)/test-results'
