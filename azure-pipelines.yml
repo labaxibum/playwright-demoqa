@@ -17,8 +17,8 @@ steps:
   displayName: 'install dependencies'
 - script: npx playwright install --with-deps
   displayName: 'Install Playwright browsers'
-- script: npx playwright test
-  displayName: 'Run Playwright tests'
+- script: npm test
+  displayName: 'Run Playwright cucumber tests'
 - powershell: Get-ChildItem -Path . -File -Recurse
 - publish: $(System.DefaultWorkingDirectory)/test-results
   artifact: playwright-report
@@ -31,5 +31,14 @@ steps:
     testResultsFiles: '*.xml'
     searchFolder: "$(System.DefaultWorkingDirectory)/test-results"
     testRunTitle: "Playwright Tests"
+
+- task: PublishCucumberReport@1
+  displayName: 'Publish Cucumber Report'
+  inputs:
+    jsonDir: '$(System.DefaultWorkingDirectory)/test-results'
+    outputPath: '$(System.DefaultWorkingDirectory)/test-results'
+    theme: 'bootstrap'
+    reportSuiteAsScenarios: true
+
   env:
     CI: 'true'
