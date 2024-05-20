@@ -14,12 +14,18 @@ steps:
   displayName: 'npm ci'
 - script: npx playwright install --with-deps
   displayName: 'Install Playwright browsers'
-- script: npm test
-  displayName: 'Run Playwright cucumber tests'
-- task: PublishPipelineArtifact@1
-  inputs:
-    targetPath: '$(Pipeline.Workspace)'
-    artifact: 'DemoQA-Playwright-Report'
-    publishLocation: 'pipeline'
+- script: npx playwright test
+  displayName: 'Run Playwright tests'
+  - powershell: Get-ChildItem -Path . -File -Recurse
+  - publish: $(System.DefaultWorkingDirectory)/test-results
+        artifact: playwright-report
+        condition: always()
+- task: PublishTestResults@2
+        displayName: "Playwright-Publish Results"
+        inputs:
+          testResultsFormat: 'JUnit'
+          testResultsFiles: '*.xml'
+          searchFolder: "$(System.DefaultWorkingDirectory)/test-results"
+        condition: always()
   env:
     CI: 'true'
