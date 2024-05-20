@@ -2,9 +2,9 @@ const { test , expect} = require("../src/fixtures/page-fixtures");
 
 
 const bookName = ['Design','design'];
-test.beforeEach(async ({ homepage }) => {
-  await homepage.goToHomePage();
-  await homepage.goToBookStorePage();
+test.beforeEach(async ({ homePage }) => {
+  await homePage.goToHomePage();
+  await homePage.goToBookStorePage();
 });
 
 test.describe('test fixtures', ()=>{

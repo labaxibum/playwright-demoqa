@@ -6,8 +6,8 @@ export class BookStorePage extends BasePage {
     this.getLoginButton = page.getByRole("button", { name: "Login" });
     this.getSearchField = page.getByPlaceholder("Type to search");
     this.getLogoutButton = page.getByRole("button", { name: "Log out" });
-    this.getSearchResultInTable = new Element(
-      'xpath=//span[contains(@id,"see-book")]/a'
+    this.getSearchResultInTable = page.locator(
+      'xpath=//span[contains(@id,"see-book")]/a' ,{ strict: false }
     );
     this.getUserNameValue = page.locator("#userName-value");
   }
@@ -21,7 +21,7 @@ export class BookStorePage extends BasePage {
   }
 
   async getResultFromSearchResult() {
-    await getSearchResultInTable.getTextContextOfElement();
+    return await this.getSearchResultInTable.innerText();
   }
 
   async clearSearchField() {
