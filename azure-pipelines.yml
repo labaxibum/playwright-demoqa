@@ -1,4 +1,5 @@
 trigger:
+
 - main
 
 pool:
@@ -15,5 +16,10 @@ steps:
   displayName: 'Install Playwright browsers'
 - script: npm test
   displayName: 'Run Playwright cucumber tests'
+- task: PublishPipelineArtifact@1
+  inputs:
+    targetPath: '$(Pipeline.Workspace)'
+    artifact: 'DemoQA-Playwright-Report'
+    publishLocation: 'pipeline'
   env:
     CI: 'true'
