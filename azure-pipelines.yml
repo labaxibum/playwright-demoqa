@@ -17,9 +17,11 @@ steps:
 - script: npx playwright test
   displayName: 'Run Playwright tests'
 - task: PublishTestResults@2
+  displayName: "Playwright-Publish Results"
   inputs:
     testResultsFormat: 'JUnit'
-    testResultsFiles: '(System.DefaultWorkingDirectory)/test-results/*.xml'
-    testRunTitle: 'test'
+    testResultsFiles: '*.xml'
+    searchFolder: "$(System.DefaultWorkingDirectory)/test-results"
+
   env:
     CI: 'true'
