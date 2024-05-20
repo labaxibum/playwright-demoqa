@@ -21,7 +21,7 @@ export class BookStorePage extends BasePage {
   }
 
   async getResultFromSearchResult() {
-    await getSearchResultInTable.getText;
+    await getSearchResultInTable.getTextContextOfElement();
   }
 
   async clearSearchField() {
