@@ -11,18 +11,25 @@ steps:
   inputs:
     versionSpec: '18'
   displayName: 'Install Node.js'
-- script: npm ci | npm install -g junit-viewer
+- script: |
+    npm ci
+    npm install -g junit-viewer
   displayName: 'install dependencies'
 - script: npx playwright install --with-deps
   displayName: 'Install Playwright browsers'
 - script: npx playwright test
   displayName: 'Run Playwright tests'
+- powershell: Get-ChildItem -Path . -File -Recurse
+- publish: $(System.DefaultWorkingDirectory)/test-results
+  artifact: playwright-report
+  condition: always()
 - task: PublishTestResults@2
   displayName: "Playwright-Publish Results"
+  condition: always()
   inputs:
-    testResultsFormat: 'JUnit'
+    testResultsFormat: JUnit
     testResultsFiles: '*.xml'
     searchFolder: "$(System.DefaultWorkingDirectory)/test-results"
-
+    testRunTitle: "Playwright Tests"
   env:
     CI: 'true'
